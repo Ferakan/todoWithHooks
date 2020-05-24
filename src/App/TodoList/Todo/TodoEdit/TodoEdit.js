@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import TextField from '@material-ui/core/TextField';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,13 +7,16 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import useInputState from '../../../hooks/useInputState';
 
-function TodoEdit ({id, editTodo, task, toggleEdit}) {
+import {TodosContext} from '../../../context/todos.context';
+
+function TodoEdit ({id, task, toggleEdit}) {
+  const {dispatch} = useContext(TodosContext);
   const [value, handleChange, reset] = useInputState(task);
   return (
     <form 
       onSubmit={(e) => {
         e.preventDefault();
-        editTodo(id, value);
+        dispatch({type: "EDIT_TODO", id:id, newTask: value })
         reset();
         toggleEdit();
       }}
