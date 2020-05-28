@@ -7,10 +7,10 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import useInputState from '../../../hooks/useInputState';
 
-import {TodosContext} from '../../../context/todos.context';
+import {DispatchContext} from '../../../context/todos.context';
 
 function TodoEdit ({id, task, toggleEdit}) {
-  const {dispatch} = useContext(TodosContext);
+  const dispatch = useContext(DispatchContext);
   const [value, handleChange, reset] = useInputState(task);
   return (
     <form 
